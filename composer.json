@@ -1,0 +1,19 @@
+{
+    "name": "danskernesdigitalebibliotek/oauth2-adgangsplatformen",
+    "description": "OAuth 2.0 provider for using Adgangsplatformen - a single sign-on solution for public libraries in Denmark",
+    "type": "library",
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "league/oauth2-client": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adgangsplatformen\\": "src/"
+        }
+    },
+    "license": "AGPL",
+    "config": {
+        "sort-packages": true
+    }
+}
