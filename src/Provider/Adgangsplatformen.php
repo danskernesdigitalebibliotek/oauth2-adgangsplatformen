@@ -10,6 +10,7 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\GenericResourceOwner;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
+use League\OAuth2\Client\Token\AccessTokenInterface;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
 
@@ -116,5 +117,22 @@ class Adgangsplatformen extends AbstractProvider
         // TODO: Implement this.
         $resourceOwnerId = $token->getResourceOwnerId() ?: '';
         return new GenericResourceOwner($response, $resourceOwnerId);
+    }
+
+    /**
+     * Revoke an access token created with a password grant.
+     *
+     * @param \League\OAuth2\Client\Token\AccessTokenInterface $token
+     *
+     * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
+     */
+    public function revokeAccessToken(AccessTokenInterface $token): void
+    {
+        $url = $this->appendQuery(
+            'https://login.bib.dk/revoke/',
+            $this->buildQueryString(['access_token' => $token->getToken()])
+        );
+        $request = $this->createRequest('DELETE', $url, $token, []);
+        $this->getParsedResponse($request);
     }
 }

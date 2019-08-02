@@ -71,4 +71,28 @@ class AdgangsplatformenTest extends TestCase
             'password' => 'password'
         ]);
     }
+
+    public function testRevokeAccessToken()
+    {
+        $accessToken = 'access-token';
+
+        $client = $this->getMockClient([
+            $this->buildAccessTokenResponse($accessToken),
+            new Response()
+        ]);
+
+        $adgangsplatformen = new Adgangsplatformen([
+            'clientId' => 'a-client-id' ,
+            'clientSecret' => 'a-client-secret',
+        ], [
+            'httpClient' => $client
+        ]);
+        $token = $adgangsplatformen->getAccessToken('password', [
+            'username' => 'username',
+            'password' => 'password'
+        ]);
+
+        $adgangsplatformen->revokeAccessToken($token);
+        $this->assertTrue(true);
+    }
 }
