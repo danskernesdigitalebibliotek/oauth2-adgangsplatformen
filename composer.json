@@ -23,13 +23,20 @@
     },
     "suggest": {
         "psr/http-server-middleware": "To use included middleware to validate access tokens in headers",
+        "mnapoli/silly-php-di": "To use included CLI app",
+        "rtheunissen/guzzle-log-middleware": "To use included CLI app",
+        "vlucas/phpdotenv": "To use included CLI app"
     },
+    "bin": ["bin/adgangsplatformen"],
     "require-dev": {
+        "mnapoli/silly-php-di": "^1.2",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.11.12",
         "phpstan/phpstan-phpunit": "^0.11.2",
         "phpunit/phpunit": "^8.2",
         "psr/http-server-middleware": "^1.0",
-        "squizlabs/php_codesniffer": "^3.4"
+        "rtheunissen/guzzle-log-middleware": "^0.4.2",
+        "squizlabs/php_codesniffer": "^3.4",
+        "vlucas/phpdotenv": "^3.4"
     }
 }

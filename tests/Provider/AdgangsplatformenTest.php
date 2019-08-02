@@ -72,6 +72,9 @@ class AdgangsplatformenTest extends TestCase
         ]);
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testRevokeAccessToken()
     {
         $accessToken = 'access-token';
@@ -93,6 +96,5 @@ class AdgangsplatformenTest extends TestCase
         ]);
 
         $adgangsplatformen->revokeAccessToken($token);
-        $this->assertTrue(true);
     }
 }

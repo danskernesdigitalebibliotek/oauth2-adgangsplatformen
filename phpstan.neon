@@ -5,3 +5,5 @@ parameters:
         - tests
     excludes_analyse:
         - vendor
+    ignoreErrors:
+        - '#.*?expects League\\OAuth2\\Client\\Token\\AccessToken, League\\OAuth2\\Client\\Token\\AccessTokenInterface given\.#'

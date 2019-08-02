@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$app = new Adgangsplatformen\Cli\Application('Adgangsplatformen CLI');
+$container = $app->getContainer();
+$container->set('params', function() {
+    $dir = getcwd() ?: '.';
+    $dotenv = \Dotenv\Dotenv::create($dir);
+    $dotenv->safeLoad();
+    $dotenv->required(['CLIENT_ID', 'CLIENT_SECRET'])->notEmpty();
+    $dotenv->required(['AGENCY', 'USERNAME', 'PASSWORD']);
+
+    return $_SERVER;
+});
+
+$app->command('token', new Adgangsplatformen\Cli\TokenCommand($_ENV))
+    ->setDescription('Retrieve an access token for a user');
+$app->command('user_data', new Adgangsplatformen\Cli\UserDataCommand($_ENV))
+    ->setDescription('Retrieve data about a user');
+
+$app->run();
