@@ -12,8 +12,16 @@
             "Adgangsplatformen\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Adgangsplatformen\\": "tests/"
+        }
+    },
     "license": "AGPL",
     "config": {
         "sort-packages": true
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.2"
     }
 }
