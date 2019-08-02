@@ -1,6 +1,6 @@
 workflow "Run tests" {
   on = "push"
-  resolves = ["Unit tests", "Check codestyle"]
+  resolves = ["Unit tests", "Check codestyle", "Static code analysis"]
 }
 
 action "Composer install" {
@@ -18,4 +18,10 @@ action "Check codestyle" {
   needs = ["Composer install"]
   uses = "docker://php:7.2-alpine"
   runs = "vendor/bin/phpcs"
+}
+
+action "Static code analysis" {
+  needs = ["Composer install"]
+  uses = "docker://php:7.2-alpine"
+  runs = "vendor/bin/phpstan analyse"
 }
