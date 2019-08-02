@@ -2,23 +2,30 @@
 
 namespace Adgangsplatformen\Cli;
 
+use Adgangsplatformen\MockClientFactoryTrait;
 use Adgangsplatformen\ResponseFactoryTrait;
 use Concat\Http\Middleware\Logger;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UserDataCommandTest extends TestCase
 {
-    use ResponseFactoryTrait;
+    use ResponseFactoryTrait, MockClientFactoryTrait;
 
     public function testInvoke()
     {
-        $client = $this->createMock(ClientInterface::class);
-        $client->expects($this->atLeastOnce())->method('send')->willReturn(
-            $this->buildAccessTokenResponse('access-token')
-        );
+        $logger = $this->createMock(Logger::class);
+
+        $client = $this->buildMockClient([
+            $this->buildAccessTokenResponse('access-token'),
+            $this->buildJsonResponse(200, ['uuid' => 'some-uuid']),
+            new Response(200)
+        ]);
+
+        $output = $this->createMock(OutputInterface::class);
+        $output->expects($this->atLeastOnce())->method('write');
+
 
         call_user_func(
             new UserDataCommand(),
@@ -29,8 +36,8 @@ class UserDataCommandTest extends TestCase
                 'USERNAME' => 'username',
                 'PASSWORD' => 'password',
             ],
-            $this->createMock(OutputInterface::class),
-            $this->createMock(Logger::class),
+            $output,
+            $logger,
             $client
         );
     }
