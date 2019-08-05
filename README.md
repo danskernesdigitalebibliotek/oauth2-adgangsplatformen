@@ -40,7 +40,7 @@ $patron = $provider->getResourceOwner($accessToken);
 
 ### PSR-15 middleware
 
-The package also includes [PSR-15 compliant]((https://www.php-fig.org/psr/psr-15/)) middleware which can be used to map requests containing an OAuth 2.0 compliant `Authentication` header containing the value "Bearer {access-token}" to the corresponding patron.
+The package also includes [PSR-15 compliant]((https://www.php-fig.org/psr/psr-15/)) middleware which can be used to map requests containing an OAuth 2.0 compliant `Authentication` header containing the value "Bearer {access-token}" to the corresponding patron. Otherwise an error response is returned.
 
 Consuming the middleware depends on the framework used.
 
@@ -51,9 +51,6 @@ $app->post('/api/foo', [
     new TokenResourceOwnerMapper($provider)
 ]);
 ```
-
-It is the responsibility of the application to determine how to handle requests which does not map to a patron.
-
 
 ### CLI application
 
