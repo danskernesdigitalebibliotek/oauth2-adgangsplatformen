@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Adgangsplatformen\Middleware;
 
-use Adgangsplatformen\Provider\Adgangsplatformen;
+use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -20,7 +20,7 @@ class TokenResourceOwnerMapper implements MiddlewareInterface
     /* @var string */
     private $attributeName;
 
-    public function __construct(Adgangsplatformen $client, string $resourceOwnerRequestAttributeName = 'resource_owner')
+    public function __construct(AbstractProvider $client, string $resourceOwnerRequestAttributeName = 'resource_owner')
     {
         $this->client = $client;
         $this->attributeName = $resourceOwnerRequestAttributeName;
