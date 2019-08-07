@@ -35,35 +35,27 @@ class TokenResourceOwnerValidator implements MiddlewareInterface
         if (empty($headers)) {
             return $this->errorResponse(401, 'Missing "Authorization" header');
         }
+        // Even though a header can contain multiple values we only want to deal
+        // with the first one. Supporting multiple values can result in weird
+        // situations like multiple resource owners attached to the same
+        // request.
+        $header = array_shift($headers) ?? '';
 
-        $accessTokens = array_filter(array_map(function (string $header) {
-            $matches = [];
-            preg_match('/^(?:\s+)?Bearer (.+)$/', $header, $matches);
-            return $matches[1] ?? false;
-        }, $headers));
-        if (empty($accessTokens)) {
+        $matches = [];
+        preg_match('/^(?:\s+)?Bearer (.+)$/', $header, $matches);
+        $token = $matches[1] ?? false;
+
+        if (empty($token)) {
             return $this->errorResponse(401, 'Invalid "Authorization" header');
         }
 
-        $resourceOwners = array_filter(array_map(function (string $token) {
-            try {
-                $accessToken = new AccessToken(['access_token' => $token]);
-                return $this->client->getResourceOwner($accessToken);
-            } catch (\Exception $e) {
-                return false;
-            }
-        }, $accessTokens));
-        if (empty($resourceOwners)) {
-            return $this->errorResponse(401, 'No resource owner(s) for access token(s)');
+        try {
+            $accessToken = new AccessToken(['access_token' => $token]);
+            $resourceOwner = $this->client->getResourceOwner($accessToken);
+            $request = $request->withAttribute($this->attributeName, $resourceOwner);
+        } catch (\Exception $e) {
+            return $this->errorResponse(401, 'No resource owner for access token');
         }
-
-        $request = array_reduce(
-            $resourceOwners,
-            function (ServerRequestInterface $request, $resourceOwner) {
-                return $request->withAttribute($this->attributeName, $resourceOwner);
-            },
-            $request
-        );
 
         return $handler->handle($request);
     }
