@@ -23,6 +23,8 @@
     },
     "suggest": {
         "psr/http-server-middleware": "To use included middleware to validate access tokens in headers",
+        "laravel/lumen-framework": "To use included Laravel service provider for easy integration",
+        "softonic/laravel-psr15-bridge": "To use included middleware with Laravel or Lumen",
         "mnapoli/silly-php-di": "To use included CLI app",
         "rtheunissen/guzzle-log-middleware": "To use included CLI app",
         "vlucas/phpdotenv": "To use included CLI app"
