@@ -170,7 +170,11 @@ composer install
 If you have [obtained a client id and secret](#usage) and have authentication information for a patron you can test the provider by using the CLI application:
 
 ```shell
-CLIENT_ID={client-id} CLIENT_SECRET={client-secret} AGENCY={library-agency} USERNAME={patron-username} PASSWORD={patron-password} bin/adgangsplatformen token
+CLIENT_ID={client-id} \
+CLIENT_SECRET={client-secret} \
+AGENCY={library-agency} \
+USERNAME={patron-username} \
+PASSWORD={patron-password} bin/adgangsplatformen token
 ```
 
 Note that the binary is located in `bin` and not in `vendor/bin` when you are working directly with the package.
