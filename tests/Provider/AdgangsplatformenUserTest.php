@@ -36,10 +36,15 @@ class AdgangsplatformenUserTest extends TestCase
         $this->assertEquals($municipalityNumber, $user->getMunicipalityNumber());
         $this->assertEquals($cpr, $user->getCPR());
         $this->assertEquals($userId, $user->getUserId());
-        $this->assertEquals(
-            [ new AdgangsplatformenUserLibrary($agencyId, $userId, $userIdType) ],
-            $user->getLibraries()
-        );
+
+        $libraries = $user->getLibraries();
+        $this->assertEquals(1, sizeof($libraries));
+        $library = array_shift($libraries);
+        if ($library instanceof AdgangsplatformenUserLibrary) {
+            $this->assertEquals($agencyId, $library->getAgencyId());
+            $this->assertEquals($userId, $library->getUserId());
+            $this->assertEquals($userIdType, $library->getUserIdType());
+        }
 
         $this->assertEquals($userArray, $user->toArray());
     }

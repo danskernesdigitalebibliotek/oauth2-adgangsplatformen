@@ -5,6 +5,7 @@ namespace Adgangsplatformen\Support\Illuminate;
 use Adgangsplatformen\Provider\Adgangsplatformen;
 use Illuminate\Contracts\Foundation\Application;
 use League\OAuth2\Client\Provider\AbstractProvider;
+use League\OAuth2\Client\Token\AccessToken;
 use PHPUnit\Framework\TestCase;
 
 class AdgangsplatformenProviderManagerTest extends TestCase
@@ -27,6 +28,10 @@ class AdgangsplatformenProviderManagerTest extends TestCase
         $manager = new AdgangsplatformenManager($app);
         $provider = $manager->driver('testing');
         $this->assertInstanceOf(Adgangsplatformen::class, $provider);
+
+        $token = 'access-token';
+        $resourceOwner = $provider->getResourceOwner(new AccessToken(['access_token' => $token]));
+        $this->assertEquals($token, $resourceOwner->getId());
     }
 
     public function testProductionDriver()
