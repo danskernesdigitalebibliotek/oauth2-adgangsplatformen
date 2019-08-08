@@ -30,8 +30,9 @@ $provider = new Adgangsplatformen\Provider\Adgangsplatformen([
     'clientSecret' => '{client-secret}',
 ]);
 $accessToken = $provider->getAccessToken('password', [
-    'username' => '{patron-id}@{library-id}'
-    'password' => '{patron-password}'
+    'username' => '{patron-id}',
+    'password' => '{patron-password}',
+    'agency' => '{library-id}'
 ]);
 $patron = $provider->getResourceOwner($accessToken);
 ```
