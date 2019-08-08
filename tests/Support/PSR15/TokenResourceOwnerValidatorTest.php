@@ -1,6 +1,6 @@
 <?php
 
-namespace Adgangsplatformen\Middleware;
+namespace Adgangsplatformen\Support\PSR15;
 
 use Adgangsplatformen\Provider\Adgangsplatformen;
 use GuzzleHttp\Psr7\ServerRequest;

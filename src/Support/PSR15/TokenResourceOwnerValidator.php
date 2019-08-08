@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adgangsplatformen\Middleware;
+namespace Adgangsplatformen\Support\PSR15;
 
 use GuzzleHttp\Psr7\Response;
 use League\OAuth2\Client\Provider\AbstractProvider;
