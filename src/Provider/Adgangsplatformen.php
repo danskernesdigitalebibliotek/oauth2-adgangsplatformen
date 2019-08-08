@@ -114,9 +114,7 @@ class Adgangsplatformen extends AbstractProvider
      */
     protected function createResourceOwner(array $response, AccessToken $token): ResourceOwnerInterface
     {
-        // TODO: Implement this.
-        $resourceOwnerId = $token->getResourceOwnerId() ?: '';
-        return new GenericResourceOwner($response, $resourceOwnerId);
+        return new AdgangsplatformenUser($response);
     }
 
     /**

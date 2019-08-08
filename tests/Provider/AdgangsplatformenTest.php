@@ -6,6 +6,7 @@ use Adgangsplatformen\MockClientFactoryTrait;
 use Adgangsplatformen\ResponseFactoryTrait;
 use GuzzleHttp\Psr7\Response;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -73,5 +74,26 @@ class AdgangsplatformenTest extends TestCase
         $this->mockHandler->append(new Response());
 
         $this->adgangsplatformen->revokeAccessToken($accessToken);
+    }
+
+    /**
+     * @depends testAccessToken
+     */
+    public function testResourceOwner(AccessTokenInterface $accessToken)
+    {
+        $id = 'abcd1234';
+        $municipalityNumber = 123;
+        $this->mockHandler->append(
+            $this->buildJsonResponse(
+                200,
+                [ 'attributes' => [ 'uniqueId' => $id, 'municipality' => $municipalityNumber]]
+            )
+        );
+
+        /* @var \Adgangsplatformen\Provider\AdgangsplatformenUser $resourceOwner */
+        $resourceOwner = $this->adgangsplatformen->getResourceOwner($accessToken);
+        $this->assertInstanceOf(AdgangsplatformenUser::class, $resourceOwner);
+        $this->assertEquals($id, $resourceOwner->getId());
+        $this->assertEquals($municipalityNumber, $resourceOwner->getMunicipalityNumber());
     }
 }
