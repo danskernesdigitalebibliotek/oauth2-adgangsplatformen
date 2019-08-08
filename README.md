@@ -18,7 +18,8 @@ The package contains several elements:
 
 1. [OAuth 2.0 provider](#oauth-20-provider)
 2. [Middleware for mapping server requests to users](#psr-15-middleware)
-3. [CLI application for demonstration and debugging](#cli-application)
+3. [Integration with Laravel and Lumen](#laravellumen-integration)
+4. [CLI application for demonstration and debugging](#cli-application)
 
 ### OAuth 2.0 provider
 
@@ -51,6 +52,52 @@ In [Zend Expressive](https://docs.zendframework.com/zend-expressive/) the follow
 $app->post('/api/foo', [
     new TokenResourceOwnerMapper($provider)
 ]);
+```
+
+### Laravel/Lumen integration
+
+The package includes a [service provider](https://laravel.com/docs/providers) which can be registered to use the middleware in a Laravel or Lumen application.
+
+The use the service provider:
+
+In the environment or in `.env` define how Adgangsplatform is accessed.
+
+```ini
+# Use testing to no contact Adgangsplatformen and instead map tokens
+# to resource owners with the same id.
+# ADGANGSPLATFORMEN_DRIVER=testing
+ADGANGSPLATFORMEN_DRIVER=production
+ADGANGSPLATFORMEN_CLIENT_ID={client-id}
+ADGANGSPLATFORMEN_CLIENT_SECRET={client-secret}
+```
+
+In `app.php` register the service provider:
+
+```php
+$app->register(\Adgangsplatformen\Support\Illuminate\AdgangsplatformenServiceProvider::class);
+```
+
+
+In `routes.php` [add routes to the auth middleware group](https://laravel.com/docs/routing#route-group-middleware):
+```php
+$router->group(['middleware' => 'auth'], function () use ($router) {
+    $router->get('/list/{listId}', 'ListController@get');
+    // More routes here.
+});
+```
+
+In controller implementations retrieve the resource owner matching the access token:
+
+```php
+class ListController extends \Laravel\Lumen\Routing\Controller
+{
+    public function get(Request $request, string $listId)
+    {
+        /* @var \Adgangsplatformen\Provider\AdgangsplatformenUser $resourceOwner */
+        $resourceOwner = $request->user();
+        // Do something...
+    }
+}
 ```
 
 ### CLI application
