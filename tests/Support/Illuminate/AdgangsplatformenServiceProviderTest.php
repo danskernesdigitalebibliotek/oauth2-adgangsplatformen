@@ -2,6 +2,8 @@
 
 namespace Adgangsplatformen\Support\Illuminate;
 
+use Adgangsplatformen\Provider\Adgangsplatformen;
+use Adgangsplatformen\Support\PSR15\TokenResourceOwnerValidator;
 use Illuminate\Contracts\Foundation\Application;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use PHPUnit\Framework\TestCase;
@@ -11,7 +13,6 @@ class AdgangsplatformenServiceProviderTest extends TestCase
 
     public function testRegister()
     {
-        $methods = get_class_methods(Application::class);
         $app = $this->getMockBuilder(Application::class)
             ->disableOriginalConstructor()
             ->disableOriginalClone()
@@ -23,7 +24,10 @@ class AdgangsplatformenServiceProviderTest extends TestCase
             // with the rest of the methods. This uses a deprecated method
             // but there seems to be no real substitute so we have to go with
             // this approach for now.
-            ->setMethods(array_merge($methods, ['routeMiddleware']))
+            ->setMethods(array_merge(
+                get_class_methods(Application::class),
+                ['routeMiddleware', 'rebinding']
+            ))
             ->getMock();
 
         $app->expects($this->at(0))
@@ -35,8 +39,25 @@ class AdgangsplatformenServiceProviderTest extends TestCase
                 })
             );
 
+        $app->expects($this->at(1))
+            ->method('singleton')
+            ->with(
+                $this->equalTo(TokenResourceOwnerValidator::class),
+                $this->callback(function ($concrete) {
+                    return is_callable($concrete);
+                })
+            );
+
         $app->expects($this->once())
             ->method('resolving')
+            ->with(
+                $this->equalTo('request'),
+                $this->callback(function ($concrete) {
+                    return is_callable($concrete);
+                })
+            );
+        $app->expects($this->once())
+            ->method('rebinding')
             ->with(
                 $this->equalTo('request'),
                 $this->callback(function ($concrete) {

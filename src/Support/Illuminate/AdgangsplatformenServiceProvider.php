@@ -50,6 +50,11 @@ class AdgangsplatformenServiceProvider extends ServiceProvider
                     return $request->attributes->get('resourceOwner');
                 });
             });
+            $this->app->rebinding('request', function ($application, Request $request) {
+                $request->setUserResolver(function () use ($request) {
+                    return $request->attributes->get('resourceOwner');
+                });
+            });
         };
     }
 }
