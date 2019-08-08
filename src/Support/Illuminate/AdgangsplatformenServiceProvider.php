@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Adgangsplatformen\Support\Illuminate;
 
+use Adgangsplatformen\Provider\Adgangsplatformen;
 use Adgangsplatformen\Support\PSR15\TokenResourceOwnerValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
-use League\OAuth2\Client\Provider\AbstractProvider;
 use Softonic\Laravel\Middleware\Psr15Bridge\Psr15MiddlewareAdapter;
 
 class AdgangsplatformenServiceProvider extends ServiceProvider
@@ -16,7 +16,7 @@ class AdgangsplatformenServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(
-            AbstractProvider::class,
+            Adgangsplatformen::class,
             function ($app) {
                 $manager = new AdgangsplatformenManager($app);
                 return $manager->driver();
@@ -31,7 +31,7 @@ class AdgangsplatformenServiceProvider extends ServiceProvider
                 TokenResourceOwnerValidator::class,
                 function () {
                     return Psr15MiddlewareAdapter::adapt(new TokenResourceOwnerValidator(
-                        $this->app->get(AbstractProvider::class),
+                        $this->app->get(Adgangsplatformen::class),
                         'resourceOwner'
                     ));
                 }

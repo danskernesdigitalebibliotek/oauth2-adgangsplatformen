@@ -33,7 +33,7 @@ class AdgangsplatformenServiceProviderTest extends TestCase
         $app->expects($this->at(0))
             ->method('singleton')
             ->with(
-                $this->equalTo(AbstractProvider::class),
+                $this->equalTo(Adgangsplatformen::class),
                 $this->callback(function ($concrete) {
                     return is_callable($concrete);
                 })
