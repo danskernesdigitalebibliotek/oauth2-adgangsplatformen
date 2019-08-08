@@ -29,6 +29,8 @@
     },
     "bin": ["bin/adgangsplatformen"],
     "require-dev": {
+        "illuminate/http": "^5.8",
+        "illuminate/support": "^5.8",
         "mnapoli/silly-php-di": "^1.2",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.11.12",
