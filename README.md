@@ -56,7 +56,7 @@ $app->post('/api/foo', [
 
 ### Laravel/Lumen integration
 
-The package includes a [service provider](https://laravel.com/docs/providers) which can be registered to use the middleware in a Laravel or Lumen application.
+The package includes a [service provider](https://laravel.com/docs/providers) which can be registered to use the middleware in a [Laravel](https://laravel.com/docs/) or [Lumen](https://lumen.laravel.com/docs/) application.
 
 The use the service provider:
 
@@ -93,8 +93,8 @@ class ListController extends \Laravel\Lumen\Routing\Controller
 {
     public function get(Request $request, string $listId)
     {
-        /* @var \Adgangsplatformen\Provider\AdgangsplatformenUser $resourceOwner */
-        $resourceOwner = $request->user();
+        /* @var \Adgangsplatformen\Provider\AdgangsplatformenUser $user */
+        $user = $request->user();
         // Do something...
     }
 }
@@ -183,7 +183,9 @@ Note that the binary is located in `bin` and not in `vendor/bin` when you are wo
 
 To maintain a consistent functional codebase the project uses unit tests and static code analysis.
 
-The codebase is automatically tested using [GitHub Actions](https://developer.github.com/actions/). Developers can run the same actions locally using Docker and [`act`](https://github.com/nektos/act).
+The codebase is automatically tested using [GitHub Actions](https://developer.github.com/actions/).
+
+Developers can run the same actions locally using Docker and [`act`](https://github.com/nektos/act). `act` will ask for a `CODECOV_TOKEN`, just provide an empty one.
 
 ### Unit tests
 
