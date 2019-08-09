@@ -23,8 +23,9 @@ class TokenCommand
         ]);
 
         $token = $provider->getAccessToken('password', [
-            'username' => sprintf('%s@%s', $params['USERNAME'], $params['AGENCY']),
-            'password' => $params['PASSWORD']
+            'username' => $params['USERNAME'],
+            'password' => $params['PASSWORD'],
+            'agency' => $params['AGENCY']
         ]);
 
         $output->write(var_export($token, true));

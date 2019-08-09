@@ -23,8 +23,9 @@ class UserDataCommand
         ]);
 
         $token = $provider->getAccessToken('password', [
-            'username' => sprintf('%s@%s', $params['USERNAME'], $params['AGENCY']),
-            'password' => $params['PASSWORD']
+            'username' => $params['USERNAME'],
+            'password' => $params['PASSWORD'],
+            'agency' => $params['AGENCY'],
         ]);
 
         try {

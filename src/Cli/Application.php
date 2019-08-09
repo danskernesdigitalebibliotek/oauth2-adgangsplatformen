@@ -23,7 +23,6 @@ class Application extends SillyPhpDi
             new NullLogger(),
             new MessageFormatter(MessageFormatter::DEBUG)
         );
-        $logger->setRequestLoggingEnabled();
         $container->set(Logger::class, $logger);
 
         $stack = HandlerStack::create();

@@ -18,7 +18,8 @@ The package contains several elements:
 
 1. [OAuth 2.0 provider](#oauth-20-provider)
 2. [Middleware for mapping server requests to users](#psr-15-middleware)
-3. [CLI application for demonstration and debugging](#cli-application)
+3. [Integration with Laravel and Lumen](#laravellumen-integration)
+4. [CLI application for demonstration and debugging](#cli-application)
 
 ### OAuth 2.0 provider
 
@@ -30,8 +31,9 @@ $provider = new Adgangsplatformen\Provider\Adgangsplatformen([
     'clientSecret' => '{client-secret}',
 ]);
 $accessToken = $provider->getAccessToken('password', [
-    'username' => '{patron-id}@{library-id}'
-    'password' => '{patron-password}'
+    'username' => '{patron-id}',
+    'password' => '{patron-password}',
+    'agency' => '{library-id}'
 ]);
 $patron = $provider->getResourceOwner($accessToken);
 ```
@@ -40,7 +42,7 @@ $patron = $provider->getResourceOwner($accessToken);
 
 ### PSR-15 middleware
 
-The package also includes [PSR-15 compliant]((https://www.php-fig.org/psr/psr-15/)) middleware which can be used to map requests containing an OAuth 2.0 compliant `Authentication` header containing the value "Bearer {access-token}" to the corresponding patron.
+The package also includes [PSR-15 compliant]((https://www.php-fig.org/psr/psr-15/)) middleware which can be used to map requests containing an OAuth 2.0 compliant `Authentication` header containing the value "Bearer {access-token}" to the corresponding patron. Otherwise an error response is returned.
 
 Consuming the middleware depends on the framework used.
 
@@ -52,8 +54,51 @@ $app->post('/api/foo', [
 ]);
 ```
 
-It is the responsibility of the application to determine how to handle requests which does not map to a patron.
+### Laravel/Lumen integration
 
+The package includes a [service provider](https://laravel.com/docs/providers) which can be registered to use the middleware in a [Laravel](https://laravel.com/docs/) or [Lumen](https://lumen.laravel.com/docs/) application.
+
+The use the service provider:
+
+In the environment or in `.env` define how Adgangsplatform is accessed.
+
+```ini
+# Use testing to no contact Adgangsplatformen and instead map tokens
+# to resource owners with the same id.
+# ADGANGSPLATFORMEN_DRIVER=testing
+ADGANGSPLATFORMEN_DRIVER=production
+ADGANGSPLATFORMEN_CLIENT_ID={client-id}
+ADGANGSPLATFORMEN_CLIENT_SECRET={client-secret}
+```
+
+In `app.php` register the service provider:
+
+```php
+$app->register(\Adgangsplatformen\Support\Illuminate\AdgangsplatformenServiceProvider::class);
+```
+
+
+In `routes.php` [add routes to the auth middleware group](https://laravel.com/docs/routing#route-group-middleware):
+```php
+$router->group(['middleware' => 'auth'], function () use ($router) {
+    $router->get('/list/{listId}', 'ListController@get');
+    // More routes here.
+});
+```
+
+In controller implementations retrieve the resource owner matching the access token:
+
+```php
+class ListController extends \Laravel\Lumen\Routing\Controller
+{
+    public function get(Request $request, string $listId)
+    {
+        /* @var \Adgangsplatformen\Provider\AdgangsplatformenUser $user */
+        $user = $request->user();
+        // Do something...
+    }
+}
+```
 
 ### CLI application
 
@@ -125,7 +170,11 @@ composer install
 If you have [obtained a client id and secret](#usage) and have authentication information for a patron you can test the provider by using the CLI application:
 
 ```shell
-CLIENT_ID={client-id} CLIENT_SECRET={client-secret} AGENCY={library-agency} USERNAME={patron-username} PASSWORD={patron-password} bin/adgangsplatformen token
+CLIENT_ID={client-id} \
+CLIENT_SECRET={client-secret} \
+AGENCY={library-agency} \
+USERNAME={patron-username} \
+PASSWORD={patron-password} bin/adgangsplatformen token
 ```
 
 Note that the binary is located in `bin` and not in `vendor/bin` when you are working directly with the package.
@@ -134,7 +183,9 @@ Note that the binary is located in `bin` and not in `vendor/bin` when you are wo
 
 To maintain a consistent functional codebase the project uses unit tests and static code analysis.
 
-The codebase is automatically tested using [GitHub Actions](https://developer.github.com/actions/). Developers can run the same actions locally using Docker and [`act`](https://github.com/nektos/act).
+The codebase is automatically tested using [GitHub Actions](https://developer.github.com/actions/).
+
+Developers can run the same actions locally using Docker and [`act`](https://github.com/nektos/act). `act` will ask for a `CODECOV_TOKEN`, just provide an empty one.
 
 ### Unit tests
 
