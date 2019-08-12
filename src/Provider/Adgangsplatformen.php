@@ -127,7 +127,7 @@ class Adgangsplatformen extends AbstractProvider
     public function revokeAccessToken(AccessTokenInterface $token): void
     {
         $url = $this->appendQuery(
-            'https://login.bib.dk/revoke/',
+            'https://login.bib.dk/oauth/revoke',
             $this->buildQueryString(['access_token' => $token->getToken()])
         );
         $request = $this->createRequest('DELETE', $url, $token, []);
