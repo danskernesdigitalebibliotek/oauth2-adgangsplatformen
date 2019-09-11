@@ -185,8 +185,6 @@ To maintain a consistent functional codebase the project uses unit tests and sta
 
 The codebase is automatically tested using [GitHub Actions](https://developer.github.com/actions/).
 
-Developers can run the same actions locally using Docker and [`act`](https://github.com/nektos/act). `act` will ask for a `CODECOV_TOKEN`, just provide an empty one.
-
 ### Unit tests
 
 Unit tests are located under `tests` and developed using [PHPUnit](https://phpunit.de/).
