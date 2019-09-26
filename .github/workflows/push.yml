@@ -36,12 +36,20 @@ jobs:
     name: Unit tests
     runs-on: ubuntu-latest
     if: '!github.event.deleted'
+    strategy:
+        matrix:
+            composer-update: ["", "--prefer-stable --prefer-lowest"]
     steps:
     - uses: actions/checkout@master
     - name: Composer install
       uses: MilesChou/composer-action@master
       with:
         args: install
+    - name: Composer update
+      uses: MilesChou/composer-action@master
+      if: "matrix.composer-update != ''"
+      with:
+        args: update ${{ matrix.composer-update }}
     - name: Unit tests
       uses: docker://php:7.3-alpine
       with:
