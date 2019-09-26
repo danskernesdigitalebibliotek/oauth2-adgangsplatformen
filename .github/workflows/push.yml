@@ -4,55 +4,50 @@ jobs:
   check_codestyle:
     name: Codestyle
     runs-on: ubuntu-latest
+    if: '!github.event.deleted'
     steps:
     - uses: actions/checkout@master
-      if: '!github.event.deleted'
     - name: Composer install
-      if: '!github.event.deleted'
       uses: MilesChou/composer-action@master
       with:
         args: install
     - name: Check codestyle
-      if: '!github.event.deleted'
       uses: docker://php:7.3-alpine
       with:
         entrypoint: vendor/bin/phpcs
+
   static_code_analysis:
     name: Static Code Analysis
     runs-on: ubuntu-latest
+    if: '!github.event.deleted'
     steps:
     - uses: actions/checkout@master
-      if: '!github.event.deleted'
     - name: Composer install
-      if: '!github.event.deleted'
       uses: MilesChou/composer-action@master
       with:
         args: install
     - name: Static code analysis
-      if: '!github.event.deleted'
       uses: docker://php:7.3-alpine
       with:
         entrypoint: vendor/bin/phpstan
         args: analyse
+
   unit_tests:
     name: Unit tests
     runs-on: ubuntu-latest
+    if: '!github.event.deleted'
     steps:
     - uses: actions/checkout@master
-      if: '!github.event.deleted'
     - name: Composer install
-      if: '!github.event.deleted'
       uses: MilesChou/composer-action@master
       with:
         args: install
     - name: Unit tests
-      if: '!github.event.deleted'
       uses: docker://php:7.3-alpine
       with:
         entrypoint: phpdbg
         args: -qrr vendor/bin/phpunit
     - name: Unit Codecov
-      if: '!github.event.deleted'
       uses: Atrox/codecov-action@v0.1.3
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
