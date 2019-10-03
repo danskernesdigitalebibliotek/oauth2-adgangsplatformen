@@ -31,11 +31,12 @@ class TokenResourceOwnerValidatorTest extends TestCase
 
         $handler = $this->createMock(RequestHandlerInterface::class);
         $handler->method('handle')
-            ->with($this->callback(function (ServerRequestInterface $request
-            ) use ($resourceOwner, $attributeName) {
-                $this->assertEquals($resourceOwner, $request->getAttribute($attributeName));
-                return true;
-            }));
+            ->with($this->callback(
+                function (ServerRequestInterface $request) use ($resourceOwner, $attributeName) {
+                    $this->assertEquals($resourceOwner, $request->getAttribute($attributeName));
+                    return true;
+                }
+            ));
 
         $middleware->process($request, $handler);
     }
