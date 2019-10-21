@@ -53,6 +53,14 @@ class AdgangsplatformenUser implements ResourceOwnerInterface
     }
 
     /**
+     * Returns an authenticated token to OpenPlatform.
+     */
+    public function getOpenPlatformToken(): ?string
+    {
+        return $this->response['attributes']['authenticatedToken'] ?? null;
+    }
+
+    /**
      * Returns a list of libraries the user is registered on.
      *
      * @return \Adgangsplatformen\Provider\AdgangsplatformenUserLibrary[]

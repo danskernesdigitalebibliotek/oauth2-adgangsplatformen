@@ -80,4 +80,18 @@ class AdgangsplatformenUserTest extends TestCase
 
         $this->assertEquals([], $user->getLibraries());
     }
+
+    public function testOpenPlatformToken()
+    {
+        $uniqueId = 'abcd1234';
+        $userArray = [
+            'attributes' => [
+                'uniqueId' => $uniqueId,
+                'authenticatedToken' => 'le token',
+            ],
+        ];
+        $user = new AdgangsplatformenUser($userArray);
+
+        $this->assertEquals('le token', $user->getOpenPlatformToken());
+    }
 }
