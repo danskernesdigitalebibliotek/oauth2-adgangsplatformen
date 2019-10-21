@@ -5,7 +5,6 @@ jobs:
     name: Codestyle
     if: '!github.event.deleted'
     runs-on: ubuntu-latest
-    if: '!github.event.deleted'
     steps:
     - uses: actions/checkout@master
     - name: Composer install
@@ -21,7 +20,6 @@ jobs:
     name: Static Code Analysis
     if: '!github.event.deleted'
     runs-on: ubuntu-latest
-    if: '!github.event.deleted'
     steps:
     - uses: actions/checkout@master
     - name: Composer install
@@ -38,7 +36,6 @@ jobs:
     name: Unit tests
     if: '!github.event.deleted'
     runs-on: ubuntu-latest
-    if: '!github.event.deleted'
     strategy:
         matrix:
             composer-update: ["", "--prefer-stable --prefer-lowest"]
