@@ -38,6 +38,13 @@ $accessToken = $provider->getAccessToken('password', [
 $patron = $provider->getResourceOwner($accessToken);
 ```
 
+If the client account has been configured to provide OpenPlatform
+tokens, you can fetch a token using:
+
+``` php
+$patron->getOpenPlatformToken();
+```
+
 **Note: The provider has currently only been tested with [password grants](https://oauth2.thephpleague.com/authorization-server/resource-owner-password-credentials-grant/). Other types of grant may or may not work.**
 
 ### PSR-15 middleware
