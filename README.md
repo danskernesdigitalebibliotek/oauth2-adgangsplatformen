@@ -1,5 +1,7 @@
 # Adgangsplatformen Provider for OAuth 2.0 Client
 
+[![](https://github.com/reload/oauth2-adgangsplatformen/workflows/Build%20and%20test/badge.svg)](https://github.com/reload/oauth2-adgangsplatformen/actions?query=workflow%3A%22Build+and+test%22)
+[![](https://github.com/reload/oauth2-adgangsplatformen/workflows/Code%20style%20review/badge.svg)](https://github.com/reload/oauth2-adgangsplatformen/actions?query=workflow%3A%22Code+style+review%22)
 [![codecov](https://codecov.io/gh/reload/oauth2-adgangsplatformen/branch/master/graph/badge.svg)](https://codecov.io/gh/reload/oauth2-adgangsplatformen)
 
 This package provides OAuth 2.0 for accessing [Adgangsplatformen](https://github.com/DBCDK/hejmdal) currently running at https://login.bib.dk/ - a single sign-on solution for public libraries in Denmark. It is based on the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
