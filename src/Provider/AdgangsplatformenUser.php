@@ -18,10 +18,13 @@ class AdgangsplatformenUser implements ResourceOwnerInterface
 
     /**
      * Returns an id for the user which is anonymized and globally unique.
+     *
+     * All users should have have a GUID but practice shows that this is not
+     * always the case.
      */
-    public function getId(): string
+    public function getId(): ?string
     {
-        return $this->response['attributes']['uniqueId'];
+        return $this->response['attributes']['uniqueId'] ?? null;
     }
 
     /**

@@ -87,4 +87,26 @@ class TokenResourceOwnerValidatorTest extends TestCase
           ],
         ];
     }
+
+    public function testNoGuid()
+    {
+        $resourceOwner = $this->createMock(ResourceOwnerInterface::class);
+        $resourceOwner->method('getId')->willReturn(null);
+
+        $client = $this->createMock(Adgangsplatformen::class);
+        $client->method('getResourceOwner')
+            ->willReturn($resourceOwner);
+
+        $request = (new ServerRequest('GET', 'https://host/path'))
+            ->withHeader('Authorization', 'Bearer access-token');
+        $handler = $this->createMock(RequestHandlerInterface::class);
+
+        $attributeName = 'attribute-name';
+        $middleware = new TokenResourceOwnerValidator($client, $attributeName);
+
+        $response = $middleware->process($request, $handler);
+
+        $this->assertEquals(401, $response->getStatusCode());
+        $this->assertStringContainsStringIgnoringCase('no id', $response->getBody()->getContents());
+    }
 }
