@@ -83,7 +83,7 @@ class TokenResourceOwnerValidatorTest extends TestCase
           ],
           [
               $request->withAddedHeader('Authorization', ' Bearer DoesNotExist'),
-              'no resource owner'
+              'unable to determine resource owner'
           ],
         ];
     }

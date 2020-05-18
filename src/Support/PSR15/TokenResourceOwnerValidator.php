@@ -84,7 +84,10 @@ class TokenResourceOwnerValidator implements MiddlewareInterface
                 'Invalid resource owner for access token. No id available.'
             );
         } catch (\Exception $e) {
-            return $this->errorResponse(401, 'No resource owner for access token');
+            return $this->errorResponse(
+                401,
+                'Unable to determine resource owner from access token. It is likely revoked, expired or invalid.'
+            );
         }
 
         return $handler->handle($request);
