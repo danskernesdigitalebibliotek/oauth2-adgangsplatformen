@@ -12,6 +12,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+/**
+ * Middleware for authenticating HTTP requests using OAuth2 access tokens.
+ */
 class TokenResourceOwnerValidator implements MiddlewareInterface
 {
 
@@ -21,10 +24,28 @@ class TokenResourceOwnerValidator implements MiddlewareInterface
     /* @var string */
     private $attributeName;
 
-    public function __construct(AbstractProvider $client, string $resourceOwnerRequestAttributeName = 'resource_owner')
-    {
+    /* @var bool */
+    private $requireResourceOwnerId;
+
+    /**
+     * TokenResourceOwnerValidator constructor.
+     *
+     * @param \League\OAuth2\Client\Provider\AbstractProvider $client
+     *    OAuth2 client to use when authenticating access tokens.
+     * @param string $resourceOwnerRequestAttributeName
+     *    Name of the attribute on the HTTP request to set with an
+     *    authenticated resource owner corresponding to the access token.
+     * @param bool $requireResourceOwnerId
+     *    Whether to require authenticated resource owners to have ids.
+     */
+    public function __construct(
+        AbstractProvider $client,
+        string $resourceOwnerRequestAttributeName = 'resource_owner',
+        bool $requireResourceOwnerId = true
+    ) {
         $this->client = $client;
         $this->attributeName = $resourceOwnerRequestAttributeName;
+        $this->requireResourceOwnerId = $requireResourceOwnerId;
     }
 
     public function process(
@@ -49,12 +70,24 @@ class TokenResourceOwnerValidator implements MiddlewareInterface
             return $this->errorResponse(401, 'Invalid "Authorization" header');
         }
 
+        $accessToken = new AccessToken(['access_token' => $token]);
+
         try {
-            $accessToken = new AccessToken(['access_token' => $token]);
             $resourceOwner = $this->client->getResourceOwner($accessToken);
+            if ($this->requireResourceOwnerId && !$resourceOwner->getId()) {
+                throw new \UnexpectedValueException('No id for resource owner');
+            }
             $request = $request->withAttribute($this->attributeName, $resourceOwner);
+        } catch (\UnexpectedValueException $e) {
+            return $this->errorResponse(
+                401,
+                'Invalid resource owner for access token. No id available.'
+            );
         } catch (\Exception $e) {
-            return $this->errorResponse(401, 'No resource owner for access token');
+            return $this->errorResponse(
+                401,
+                'Unable to determine resource owner from access token. It is likely revoked, expired or invalid.'
+            );
         }
 
         return $handler->handle($request);
