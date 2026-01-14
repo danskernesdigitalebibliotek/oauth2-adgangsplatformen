@@ -24,7 +24,7 @@ jobs:
         coverage: none
     - name: Install Dependencies
       run: |
-        composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+        composer install
     # Tell composer to update to the lowest supported version, if it's
     # that part of the matrix we're running.
     - name: Composer update
