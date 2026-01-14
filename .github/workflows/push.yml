@@ -1,5 +1,10 @@
 on: push
 name: Build and test
+
+permissions:
+  # To give Codecov permission to use the OIDC token.
+  id-token: write
+
 jobs:
   unit_tests:
     name: Unit tests
@@ -30,7 +35,6 @@ jobs:
       run: |
         phpdbg -qrr vendor/bin/phpunit
     - name: Report coverage to Codecov
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      run: |
-        bash <(curl -s https://codecov.io/bash)
+      uses: codecov/codecov-action@v5
+      with:
+        use_oidc: true
