@@ -20,7 +20,10 @@
     },
     "license": "AGPL",
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     },
     "suggest": {
         "psr/http-server-middleware": "To use included middleware to validate access tokens in headers",
