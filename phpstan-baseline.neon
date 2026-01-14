@@ -1,0 +1,481 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\TokenCommand\:\:__invoke\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Cli/TokenCommand.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\TokenCommand\:\:__invoke\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cli/TokenCommand.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\UserDataCommand\:\:__invoke\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Cli/UserDataCommand.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\UserDataCommand\:\:__invoke\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cli/UserDataCommand.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\Adgangsplatformen\:\:__construct\(\) has parameter \$collaborators with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Provider/Adgangsplatformen.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\Adgangsplatformen\:\:__construct\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Provider/Adgangsplatformen.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\Adgangsplatformen\:\:checkResponse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Provider/Adgangsplatformen.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\Adgangsplatformen\:\:createResourceOwner\(\) has parameter \$response with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Provider/Adgangsplatformen.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\Adgangsplatformen\:\:getBaseAccessTokenUrl\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Provider/Adgangsplatformen.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\Adgangsplatformen\:\:getDefaultScopes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Provider/Adgangsplatformen.php
+
+		-
+			message: '#^Parameter \#1 \$message of class League\\OAuth2\\Client\\Provider\\Exception\\IdentityProviderException constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/Adgangsplatformen.php
+
+		-
+			message: '#^Cannot access offset ''attributes'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 5
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Cannot access offset ''cpr'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Cannot access offset ''libraries'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Cannot access offset ''municipality'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Cannot access offset ''uniqueId'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Cannot access offset ''userId'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUser\:\:__construct\(\) has parameter \$response with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUser\:\:getCPR\(\) should return string\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUser\:\:getId\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUser\:\:getMunicipalityNumber\(\) should return int but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUser\:\:getUserId\(\) should return string\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUser\:\:toArray\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUser\:\:toArray\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Parameter \#1 \$agencyId of class Adgangsplatformen\\Provider\\AdgangsplatformenUserLibrary constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, Closure\(array\)\: \(Adgangsplatformen\\Provider\\AdgangsplatformenUserLibrary\|null\) given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Parameter \#2 \$array of function array_map expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Parameter \#2 \$userId of class Adgangsplatformen\\Provider\\AdgangsplatformenUserLibrary constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Parameter \#3 \$userIdType of class Adgangsplatformen\\Provider\\AdgangsplatformenUserLibrary constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Property Adgangsplatformen\\Provider\\AdgangsplatformenUser\:\:\$response has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Provider/AdgangsplatformenUser.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUserLibrary\:\:getAgencyId\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUserLibrary.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUserLibrary\:\:getUserId\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUserLibrary.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUserLibrary\:\:getUserIdType\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/AdgangsplatformenUserLibrary.php
+
+		-
+			message: '#^Property Adgangsplatformen\\Provider\\AdgangsplatformenUserLibrary\:\:\$agencyId has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Provider/AdgangsplatformenUserLibrary.php
+
+		-
+			message: '#^Property Adgangsplatformen\\Provider\\AdgangsplatformenUserLibrary\:\:\$userId has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Provider/AdgangsplatformenUserLibrary.php
+
+		-
+			message: '#^Property Adgangsplatformen\\Provider\\AdgangsplatformenUserLibrary\:\:\$userIdType has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Provider/AdgangsplatformenUserLibrary.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Support\\Illuminate\\AdgangsplatformenManager\:\:getDefaultDriver\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Support/Illuminate/AdgangsplatformenManager.php
+
+		-
+			message: '#^Parameter \#1 \$client of class Adgangsplatformen\\Support\\PSR15\\TokenResourceOwnerValidator constructor expects League\\OAuth2\\Client\\Provider\\AbstractProvider, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Support/Illuminate/AdgangsplatformenServiceProvider.php
+
+		-
+			message: '#^Parameter \#1 \$container of class Adgangsplatformen\\Support\\Illuminate\\AdgangsplatformenManager constructor expects Illuminate\\Contracts\\Container\\Container, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Support/Illuminate/AdgangsplatformenServiceProvider.php
+
+		-
+			message: '#^Cannot call method getResourceOwner\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Support/PSR15/TokenResourceOwnerValidator.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Support/PSR15/TokenResourceOwnerValidator.php
+
+		-
+			message: '#^Parameter \#1 \$name of method Psr\\Http\\Message\\ServerRequestInterface\:\:withAttribute\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Support/PSR15/TokenResourceOwnerValidator.php
+
+		-
+			message: '#^Property Adgangsplatformen\\Support\\PSR15\\TokenResourceOwnerValidator\:\:\$attributeName has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Support/PSR15/TokenResourceOwnerValidator.php
+
+		-
+			message: '#^Property Adgangsplatformen\\Support\\PSR15\\TokenResourceOwnerValidator\:\:\$client has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Support/PSR15/TokenResourceOwnerValidator.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\ApplicationTest\:\:testBootstrap\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Cli/ApplicationTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\TokenCommandTest\:\:buildAccessTokenResponse\(\) has parameter \$accessToken with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/Cli/TokenCommandTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\TokenCommandTest\:\:buildJsonResponse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Cli/TokenCommandTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\TokenCommandTest\:\:buildMockClient\(\) has parameter \$responses with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Cli/TokenCommandTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\TokenCommandTest\:\:testInvoke\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Cli/TokenCommandTest.php
+
+		-
+			message: '#^Property Adgangsplatformen\\Cli\\TokenCommandTest\:\:\$mockHandler has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: tests/Cli/TokenCommandTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\UserDataCommandTest\:\:buildAccessTokenResponse\(\) has parameter \$accessToken with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/Cli/UserDataCommandTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\UserDataCommandTest\:\:buildJsonResponse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Cli/UserDataCommandTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\UserDataCommandTest\:\:buildMockClient\(\) has parameter \$responses with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Cli/UserDataCommandTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Cli\\UserDataCommandTest\:\:testInvoke\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Cli/UserDataCommandTest.php
+
+		-
+			message: '#^Property Adgangsplatformen\\Cli\\UserDataCommandTest\:\:\$mockHandler has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: tests/Cli/UserDataCommandTest.php
+
+		-
+			message: '#^Cannot call method append\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Cannot call method getAccessToken\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Cannot call method getResourceOwner\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Cannot call method getToken\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Cannot call method revokeAccessToken\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenTest\:\:buildAccessTokenResponse\(\) has parameter \$accessToken with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenTest\:\:buildJsonResponse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenTest\:\:buildMockClient\(\) has parameter \$responses with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenTest\:\:testAccessToken\(\) should return League\\OAuth2\\Client\\Token\\AccessTokenInterface but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenTest\:\:testErrorResponse\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenTest\:\:testResourceOwner\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenTest\:\:testRevokeAccessToken\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Property Adgangsplatformen\\Provider\\AdgangsplatformenTest\:\:\$adgangsplatformen has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Property Adgangsplatformen\\Provider\\AdgangsplatformenTest\:\:\$mockHandler has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: tests/Provider/AdgangsplatformenTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUserTest\:\:testMissingAttributes\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Provider/AdgangsplatformenUserTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUserTest\:\:testMissingLibraryAttributes\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Provider/AdgangsplatformenUserTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Provider\\AdgangsplatformenUserTest\:\:testUserAttributes\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Provider/AdgangsplatformenUserTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Support\\Illuminate\\AdgangsplatformenProviderManagerTest\:\:testGetDefaultDriver\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Support/Illuminate/AdgangsplatformenProviderManagerTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Support\\Illuminate\\AdgangsplatformenProviderManagerTest\:\:testProductionDriver\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Support/Illuminate/AdgangsplatformenProviderManagerTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Support\\Illuminate\\AdgangsplatformenProviderManagerTest\:\:testTestingDriver\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Support/Illuminate/AdgangsplatformenProviderManagerTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Support\\Illuminate\\AdgangsplatformenServiceProviderTest\:\:testRegister\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Support/Illuminate/AdgangsplatformenServiceProviderTest.php
+
+		-
+			message: '#^Trying to mock an undefined method rebinding\(\) on class Illuminate\\Contracts\\Foundation\\Application\.$#'
+			identifier: phpunit.mockMethod
+			count: 1
+			path: tests/Support/Illuminate/AdgangsplatformenServiceProviderTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Support\\PSR15\\TokenResourceOwnerValidatorTest\:\:invalidRequests\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Support/PSR15/TokenResourceOwnerValidatorTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Support\\PSR15\\TokenResourceOwnerValidatorTest\:\:testInvalidRequests\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Support/PSR15/TokenResourceOwnerValidatorTest.php
+
+		-
+			message: '#^Method Adgangsplatformen\\Support\\PSR15\\TokenResourceOwnerValidatorTest\:\:testProcess\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Support/PSR15/TokenResourceOwnerValidatorTest.php
