@@ -3,7 +3,7 @@
     "description": "OAuth 2.0 provider for using Adgangsplatformen - a single sign-on solution for public libraries in Denmark",
     "type": "library",
     "require": {
-        "php": "^7.2",
+        "php": "^7.2 || ^8 ",
         "ext-json": "*",
         "composer/package-versions-deprecated": "^1.11",
         "league/oauth2-client": "^2.4.1"

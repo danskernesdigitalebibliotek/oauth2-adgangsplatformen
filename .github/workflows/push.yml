@@ -11,14 +11,15 @@ jobs:
     if: '!github.event.deleted'
     runs-on: ubuntu-latest
     strategy:
-        matrix:
-            composer-update: ["", "--prefer-stable --prefer-lowest"]
+      matrix:
+        php-version: [ "7.4", "8.0"]
+        composer-update: ["", "--prefer-stable --prefer-lowest"]
     steps:
     - uses: actions/checkout@master
     - name: Setup PHP, with composer and extensions
       uses: shivammathur/setup-php@master
       with:
-        php-version: 7.4
+        php-version: ${{ matrix.php-version }}
         tools: composer:v2
     - name: Install Dependencies
       run: |
