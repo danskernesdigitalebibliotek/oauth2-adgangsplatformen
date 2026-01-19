@@ -1,25 +1,29 @@
 on: push
 name: Build and test
+
+permissions:
+  # To give Codecov permission to use the OIDC token.
+  id-token: write
+
 jobs:
   unit_tests:
     name: Unit tests
     if: '!github.event.deleted'
     runs-on: ubuntu-latest
     strategy:
-        matrix:
-            composer-update: ["", "--prefer-stable --prefer-lowest"]
+      matrix:
+        php-version: [ "7.4", "8.0"]
+        composer-update: ["", "--prefer-stable --prefer-lowest"]
     steps:
     - uses: actions/checkout@master
     - name: Setup PHP, with composer and extensions
       uses: shivammathur/setup-php@master
       with:
-        php-version: 7.3
+        php-version: ${{ matrix.php-version }}
         tools: composer:v2
-        # We're using phpdbg, we don't need a coverage extension.
-        coverage: none
     - name: Install Dependencies
       run: |
-        composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+        composer install
     # Tell composer to update to the lowest supported version, if it's
     # that part of the matrix we're running.
     - name: Composer update
@@ -28,9 +32,8 @@ jobs:
           composer update ${{ matrix.composer-update }}
     - name: Unit tests
       run: |
-        phpdbg -qrr vendor/bin/phpunit
+        ./vendor/bin/phpunit
     - name: Report coverage to Codecov
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      run: |
-        bash <(curl -s https://codecov.io/bash)
+      uses: codecov/codecov-action@v5
+      with:
+        use_oidc: true
