@@ -43,6 +43,14 @@ class AdgangsplatformenManager extends Manager
         ]);
     }
 
+    public function createStagingDriver() : AbstractProvider
+    {
+        return new Adgangsplatformen([
+            'clientId' => env('ADGANGSPLATFORMEN_CLIENT_ID'),
+            'clientSecret' => env('ADGANGSPLATFORMEN_CLIENT_SECRET')
+        ], [], true);
+    }
+
     /**
      * Get the default driver name.
      *

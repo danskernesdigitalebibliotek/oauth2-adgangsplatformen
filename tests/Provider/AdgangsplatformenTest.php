@@ -27,6 +27,68 @@ class AdgangsplatformenTest extends TestCase
         ]);
     }
 
+    public function testUrlMapping(): void
+    {
+        $token = $this->createStub(AccessToken::class);
+
+        $adgangsplatformen = new Adgangsplatformen([
+            'clientId' => 'a-client-id' ,
+            'clientSecret' => 'a-client-secret',
+        ], [
+            'httpClient' => $this->buildMockClient()
+        ]);
+
+        $this->assertEquals(
+            'https://login.bib.dk/',
+            $adgangsplatformen->getBaseUrl(),
+        );
+        $this->assertEquals(
+            'https://login.bib.dk/oauth/authorize',
+            $adgangsplatformen->getBaseAuthorizationUrl(),
+        );
+        $this->assertEquals(
+            'https://login.bib.dk/oauth/token',
+            $adgangsplatformen->getBaseAccessTokenUrl([]),
+        );
+        $this->assertEquals(
+            'https://login.bib.dk/oauth/authorize',
+            $adgangsplatformen->getBaseAuthorizationUrl(),
+        );
+        $this->assertEquals(
+            'https://login.bib.dk/userinfo',
+            $adgangsplatformen->getResourceOwnerDetailsUrl($token),
+        );
+
+        $adgangsplatformen = new Adgangsplatformen([
+            'clientId' => 'a-client-id' ,
+            'clientSecret' => 'a-client-secret',
+        ], [
+            'httpClient' => $this->buildMockClient()
+        ], true);
+
+        $this->assertEquals(
+            'https://stg.login.bib.dk/',
+            $adgangsplatformen->getBaseUrl(),
+        );
+        $this->assertEquals(
+            'https://stg.login.bib.dk/oauth/authorize',
+            $adgangsplatformen->getBaseAuthorizationUrl(),
+        );
+        $this->assertEquals(
+            'https://stg.login.bib.dk/oauth/token',
+            $adgangsplatformen->getBaseAccessTokenUrl([]),
+        );
+        $this->assertEquals(
+            'https://stg.login.bib.dk/oauth/authorize',
+            $adgangsplatformen->getBaseAuthorizationUrl(),
+        );
+        $this->assertEquals(
+            'https://stg.login.bib.dk/userinfo',
+            $adgangsplatformen->getResourceOwnerDetailsUrl($token),
+        )
+            ;
+    }
+
     public function testAccessToken(): AccessTokenInterface
     {
         $accessToken = 'access-token';
@@ -44,7 +106,7 @@ class AdgangsplatformenTest extends TestCase
         return $token;
     }
 
-    public function testErrorResponse()
+    public function testErrorResponse(): void
     {
         $errorCode = 401;
         $errorMessage = 'Invalid token: client id is invalid';
@@ -69,7 +131,7 @@ class AdgangsplatformenTest extends TestCase
      * @depends testAccessToken
      * @doesNotPerformAssertions
      */
-    public function testRevokeAccessToken(AccessTokenInterface $accessToken)
+    public function testRevokeAccessToken(AccessTokenInterface $accessToken): void
     {
         $this->mockHandler->append(new Response());
 
@@ -79,7 +141,7 @@ class AdgangsplatformenTest extends TestCase
     /**
      * @depends testAccessToken
      */
-    public function testResourceOwner(AccessTokenInterface $accessToken)
+    public function testResourceOwner(AccessTokenInterface $accessToken): void
     {
         $id = 'abcd1234';
         $municipalityNumber = 123;

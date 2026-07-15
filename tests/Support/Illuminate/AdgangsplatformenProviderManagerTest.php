@@ -4,14 +4,13 @@ namespace Adgangsplatformen\Support\Illuminate;
 
 use Adgangsplatformen\Provider\Adgangsplatformen;
 use Illuminate\Contracts\Foundation\Application;
-use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use PHPUnit\Framework\TestCase;
 
 class AdgangsplatformenProviderManagerTest extends TestCase
 {
 
-    public function testGetDefaultDriver()
+    public function testGetDefaultDriver(): void
     {
         putenv('ADGANGSPLATFORMEN_CLIENT_ID=client-id');
         putenv('ADGANGSPLATFORMEN_CLIENT_SECRET=client-secret');
@@ -22,7 +21,7 @@ class AdgangsplatformenProviderManagerTest extends TestCase
         $this->assertInstanceOf(Adgangsplatformen::class, $provider);
     }
 
-    public function testTestingDriver()
+    public function testTestingDriver(): void
     {
         $app = $this->createMock(Application::class);
         $manager = new AdgangsplatformenManager($app);
@@ -34,7 +33,7 @@ class AdgangsplatformenProviderManagerTest extends TestCase
         $this->assertEquals($token, $resourceOwner->getId());
     }
 
-    public function testProductionDriver()
+    public function testProductionDriver(): void
     {
         putenv('ADGANGSPLATFORMEN_CLIENT_ID=client-id');
         putenv('ADGANGSPLATFORMEN_CLIENT_SECRET=client-secret');
@@ -42,6 +41,17 @@ class AdgangsplatformenProviderManagerTest extends TestCase
         $app = $this->createMock(Application::class);
         $manager = new AdgangsplatformenManager($app);
         $provider = $manager->driver('production');
+        $this->assertInstanceOf(Adgangsplatformen::class, $provider);
+    }
+
+    public function testStagingDriver(): void
+    {
+        putenv('ADGANGSPLATFORMEN_CLIENT_ID=client-id');
+        putenv('ADGANGSPLATFORMEN_CLIENT_SECRET=client-secret');
+
+        $app = $this->createMock(Application::class);
+        $manager = new AdgangsplatformenManager($app);
+        $provider = $manager->driver('staging');
         $this->assertInstanceOf(Adgangsplatformen::class, $provider);
     }
 }
