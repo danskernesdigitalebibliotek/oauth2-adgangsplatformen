@@ -18,6 +18,7 @@ use Illuminate\Contracts\Foundation\Application;
  */
 interface TestApplication extends Application
 {
-    public function routeMiddleware(array $middleware);
-    public function rebinding($abstract, \Closure $callback);
+    // @phpstan-ignore missingType.iterableValue (not known)
+    public function routeMiddleware(array $middleware): void;
+    public function rebinding(string $abstract, \Closure $callback): void;
 }

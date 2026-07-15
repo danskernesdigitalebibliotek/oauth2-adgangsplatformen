@@ -12,7 +12,7 @@ class AdgangsplatformenServiceProviderTest extends TestCase
 {
     use ProphecyTrait;
 
-    public function testRegister()
+    public function testRegister(): void
     {
         // See TestApplication class comment.
         $app = $this->prophesize(TestApplication::class);

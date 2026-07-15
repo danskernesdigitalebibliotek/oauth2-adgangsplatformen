@@ -26,6 +26,7 @@ class TokenResourceOwnerValidatorTest extends TestCase
         $attributeName = 'attribute-name';
         $middleware = new TokenResourceOwnerValidator($client, $attributeName);
 
+        /** @var \Psr\Http\Message\ServerRequestInterface $request */
         $request = (new ServerRequest('GET', 'https://host/path'))
             ->withHeader('Authorization', 'Bearer access-token');
 
