@@ -7,7 +7,6 @@ namespace Adgangsplatformen\Provider;
 use League\OAuth2\Client\OptionProvider\HttpBasicAuthOptionProvider;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
-use League\OAuth2\Client\Provider\GenericResourceOwner;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Token\AccessTokenInterface;
@@ -18,12 +17,27 @@ class Adgangsplatformen extends AbstractProvider
 {
     use BearerAuthorizationTrait;
 
-    public function __construct(array $options = [], array $collaborators = [])
-    {
+    protected string $baseUrl = 'https://login.bib.dk/';
+
+    public function __construct(
+        array $options = [],
+        array $collaborators = [],
+        bool $useStaging = false,
+    ) {
         if (empty($collaborators['optionProvider'])) {
             $collaborators['optionProvider'] = new HttpBasicAuthOptionProvider();
         }
+
+        if ($useStaging) {
+            $this->baseUrl = 'https://stg.login.bib.dk/';
+        }
+
         parent::__construct($options, $collaborators);
+    }
+
+    public function getBaseUrl(): string
+    {
+        return $this->baseUrl;
     }
 
     /**
@@ -35,7 +49,7 @@ class Adgangsplatformen extends AbstractProvider
      */
     public function getBaseAuthorizationUrl(): string
     {
-        return 'https://login.bib.dk/oauth/authorize';
+        return $this->getBaseUrl() . 'oauth/authorize';
     }
 
     /**
@@ -49,7 +63,7 @@ class Adgangsplatformen extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params): string
     {
-        return 'https://login.bib.dk/oauth/token';
+        return $this->getBaseUrl() . 'oauth/token';
     }
 
     /**
@@ -61,7 +75,7 @@ class Adgangsplatformen extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token): string
     {
-        return 'https://login.bib.dk/userinfo';
+        return $this->getBaseUrl() . 'userinfo';
     }
 
     /**
@@ -127,7 +141,7 @@ class Adgangsplatformen extends AbstractProvider
     public function revokeAccessToken(AccessTokenInterface $token): void
     {
         $url = $this->appendQuery(
-            'https://login.bib.dk/revoke/',
+            $this->getBaseUrl() . 'revoke/',
             $this->buildQueryString(['access_token' => $token->getToken()])
         );
         $request = $this->createRequest('DELETE', $url, $token, []);
