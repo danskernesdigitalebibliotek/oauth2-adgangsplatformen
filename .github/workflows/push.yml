@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [ "7.4", "8.0"]
+        # We limit tests on the current and minimal PHP version.
+        php-version: [ "8.2", "8.5"]
         composer-update: ["", "--prefer-stable --prefer-lowest"]
     steps:
     - uses: actions/checkout@master
