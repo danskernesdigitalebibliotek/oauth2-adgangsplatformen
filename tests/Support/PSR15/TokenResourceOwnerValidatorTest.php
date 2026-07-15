@@ -69,7 +69,7 @@ class TokenResourceOwnerValidatorTest extends TestCase
         $this->assertStringContainsStringIgnoringCase($expectedText, $response->getBody()->getContents());
     }
 
-    public function invalidRequests()
+    public static function invalidRequests()
     {
         $request = new ServerRequest('GET', 'https://host/path');
         return [
