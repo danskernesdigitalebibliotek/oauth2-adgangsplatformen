@@ -21,11 +21,11 @@ class AdgangsplatformenUser implements ResourceOwnerInterface
      */
     public function getId(): string
     {
-        if (isset($this->response['attributes']['uniqueId'])) {
+        if ($this->response['attributes']['uniqueId']) {
             return $this->response['attributes']['uniqueId'];
         }
 
-        if (isset($this->response['attributes']['uniloginUniIdHash'])) {
+        if ($this->response['attributes']['uniloginUniIdHash']) {
             return $this->response['attributes']['uniloginUniIdHash'];
         }
 
