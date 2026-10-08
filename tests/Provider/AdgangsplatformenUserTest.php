@@ -80,4 +80,32 @@ class AdgangsplatformenUserTest extends TestCase
 
         $this->assertEquals([], $user->getLibraries());
     }
+
+    public function testUnilogin(): void
+    {
+        $user = new AdgangsplatformenUser([
+            'attributes' => [
+                'cpr' => null,
+                'userId' => 'uni123',
+                'uniloginUniIdHash' => 'unihash'
+            ],
+        ]);
+
+        $this->assertEquals('unihash', $user->getId());
+    }
+
+    public function testMissingIds(): void
+    {
+        $user = new AdgangsplatformenUser([
+            'attributes' => [
+                'cpr' => null,
+                'userId' => 'something',
+            ],
+        ]);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Could not find a unique anonymized ID.');
+
+        $user->getId();
+    }
 }

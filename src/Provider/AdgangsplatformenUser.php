@@ -21,7 +21,17 @@ class AdgangsplatformenUser implements ResourceOwnerInterface
      */
     public function getId(): string
     {
-        return $this->response['attributes']['uniqueId'];
+        if (isset($this->response['attributes']['uniqueId'])) {
+            return $this->response['attributes']['uniqueId'];
+        }
+
+        if (isset($this->response['attributes']['uniloginUniIdHash'])) {
+            return $this->response['attributes']['uniloginUniIdHash'];
+        }
+
+        // We're out of options, we can't return `userId` as it could be a CPR
+        // number.
+        throw new \RuntimeException('Could not find a unique anonymized ID.');
     }
 
     /**
